@@ -1,16 +1,13 @@
-pop = table.remove
-psh = table.insert
-
 class GameLoop
   new: () =>
     @tickers = {}
       
   addLoop: (obj) =>
-    psh(@tickers,obj)
+    table.insert @tickers,obj
   
-  update: (dt)=>
+  update: (dt) =>
     for obj in *@tickers do
-      if obj != nil then
+      if obj then
         obj\tick(dt)
         
         

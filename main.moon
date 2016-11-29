@@ -9,6 +9,7 @@ juno.onLoad = () ->
 
 juno.onUpdate = (dt) ->
   G.time += dt
+  (require "stalker").update dt
   G.GameLoop\update(dt)
   return
 

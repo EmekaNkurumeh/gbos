@@ -1,22 +1,18 @@
-pop = table.remove
-psh = table.insert
-
 class Renderer
-  new: (@num_layer = 5) =>
-    @drawers = {}
-    for i = 0, @num_layers do
-      @drawers[i] = {}
+  new: (@layers = 5) =>
+    @buffers = {}
+    for i = 1, @layers do
+      @buffers[i] = {}
       
   addRenderer: (obj,layer) =>
-    l = layer or 0
-    psh(@drawers[l],obj)
+    l = layer or 1
+    table.insert @buffers[l],obj
   
-  draw: ()=>
-    for layer = 0, #@drawers do
-      for draw = 0, #@drawers[layer] do
-        obj = @drawers[layer][draw]
-        if obj != nil then
-          obj:draw()
+  draw: () =>
+    for layer = 1, #@buffers do
+      for obj in *@buffers[layer] do
+        if obj[i] then
+          obj[i]\draw!
         
         
 Renderer
