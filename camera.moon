@@ -16,7 +16,7 @@ class Camera
   rotate: (dr) =>
     @rot += dr
 
-  scale: (dsx,dsy) =>
+  zoom: (dsx,dsy) =>
     dsx or= 1
     @sx *= dsx
     @sy *= (dsy or dsx)
