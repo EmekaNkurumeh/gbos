@@ -7,7 +7,9 @@ class Camera
   set: (screen) =>
     juno.graphics.drawBuffer screen,0,0,{x:@x,y:@y,w:@w,h:@h},@rot,@sx,@sy
 
-  unset: () =>
+  unset: (screen) =>
+    screen:reset()
+    juno.graphics.reset()
 
   move: (dx,dy) =>
     @x += (dx or 0)
