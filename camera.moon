@@ -1,10 +1,32 @@
 class Camera
-  new: (x,y,w,h,@rot) =>
-    @pos = require("vec2")\new x,y
-    @size = require("vec2")\new w,h
-    @scale = require("vec2")\new 1,1
+  new: (pos,size,scale,@rot) =>
+    @x,@y = pos.x,pos.y
+    @w,@h = size.x,size.y
+    @sx,@sy = scale.x,scale.y
+
   set: (screen) =>
-    juno.graphics.drawBuffer screen,0,0,{x:@x,y:@y,w:@w,h:@h},@rot,@scale.x,@scale.y
+    juno.graphics.drawBuffer screen,0,0,{x:@x,y:@y,w:@w,h:@h},@rot,@sx,@sy
+
   unset: () =>
+
+  move: (dx,dy) =>
+    @x += (dx or 0)
+    @y += (dy or 0)
   
+  rotate: (dr) =>
+    @rot += dr
+
+  scale: (dsx,dsy) =>
+    dsx or= 1
+    @sx *= dsx
+    @sy *= (dsy or dsx)
+  
+  goto: (x,y) =>
+    @x or= x
+    @y or= y
+  
+  setScale: (dsx,dsy) =>
+    @sx = dsx or @sx
+    @sy = dsy or @sy
+    
 Camera
