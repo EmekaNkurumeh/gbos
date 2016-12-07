@@ -2,7 +2,7 @@ class GameLoop
   new: () =>
     @tickers = {}
       
-  addLoop: (obj) =>
+  add: (obj) =>
     table.insert @tickers,obj
   
   update: (dt) =>

@@ -4,7 +4,7 @@ class Renderer
     for i = 1, @layers do
       @buffers[i] = {}
       
-  addRenderer: (obj,layer) =>
+  add: (obj,layer) =>
     l = layer or 1
     table.insert @buffers[l],obj
   
