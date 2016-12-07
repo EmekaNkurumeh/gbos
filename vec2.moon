@@ -72,6 +72,48 @@ class vec2
   
   move: (v) => 
     if typeof(v) == "vec2"
+      @x += v.x
+      @y += v.y
+    else 
+      @x += v
+      @y += v
+  
+  distance: (v) => math.sqrt ((@x-v.x)^2)+((@y-v.y)^2)
+  
+  middle: (v) => vec2 (@x+v.x)/2,(@y+v.y)/2
+  
+  clone: => @
+  
+  __eq: (v) =>  
+    if typeof(v) == "vec2"
+      if @x == v.x and @y == v.y then true else false
+    else 
+      if @x+@y == v then true else false
+      
+  __lt: (v) =>  
+    if typeof(v) == "vec2"
+      if @x < v.x and @y < v.y then true else false
+    else 
+      if @x+@y < v then true else false
+      
+  __le: (v) =>  
+    if typeof(v) == "vec2"
+      if @x <= v.x and @y <= v.y then true else false 
+    else 
+      if @x+@y <= v then true else false
+      
+  __concat: (v) =>
+    if typeof(v) == "vec2" 
+      vec2 tonumber("#{@x}#{v.x}"),tonumber("#{@y}#{v.y}")
+    else
+      vec2 tonumber("#{@x}#{v}"),tonumber("#{@y}#{v}")
+      
+  __len: => @x+@y
+  
+  __tostring: => "(#{@x},#{@y})"
+  
+  move: (v) => 
+    if typeof(v) == "vec2"
       @ += v
     else 
       @x += v
@@ -83,4 +125,4 @@ class vec2
   
   clone: => @
   
-  vec2
+vec2
