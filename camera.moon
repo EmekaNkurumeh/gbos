@@ -8,8 +8,8 @@ class Camera
     @_w,@_h = size.x,size.y
     @_sx,@_sy = scale.x,scale.y
 
-  set: (screen) =>
-    juno.graphics.drawBuffer screen,0,0,{x:@_x,y:@_y,w:@_w,h:@_h},@_rot,@_sx,@_sy
+  set: (screen,drx=0,dry=0) =>
+    juno.graphics.drawBuffer screen,drx,dry,{x:@_x,y:@_y,w:@_w,h:@_h},@_rot,@_sx,@_sy
 
   unset: (screen) =>
     screen\reset()
