@@ -1,6 +1,6 @@
 class Camera
   
-  @@clamp = (_, min, max) -> 
+  @@clamp = (_, min, max) => 
     (_ < min) and min or (_ > max and max) or _
   
   new: (pos,size,scale,@_rot) =>
@@ -34,8 +34,8 @@ class Camera
     @_y = if @_bounds then @@clamp y,@_bounds.y1,@_bounds.y2 else y
   
   goTo: (x,y) =>
-    if x then @X x
-    if y then @Y y
+    if x then @setX x
+    if y then @setY y
   
   setScale: (dsx,dsy) =>
     @_sx = dsx or @_sx
