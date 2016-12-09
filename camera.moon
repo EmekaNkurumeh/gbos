@@ -27,10 +27,10 @@ class Camera
     @_sx *= dsx
     @_sy *= (dsy or dsx)
   
-  setX: (x) =>
+  X: (x) =>
     @_x = if @_bounds then @@clamp x,@_bounds.x1,@_bounds.x2 else x
 
-  setY: (y) =>
+  Y: (y) =>
     @_y = if @_bounds then @@clamp y,@_bounds.y1,@_bounds.y2 else y
   
   goTo: (x,y) =>
