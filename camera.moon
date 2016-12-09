@@ -44,6 +44,6 @@ class Camera
   getBounds: => (table.unpack or unpack) @_bounds
    
   setBounds: (x,y,w,h) =>
-    @_bounds = {:w,:h,:x1,:y1,x2:x+w,y2:y+h}
+    @_bounds = {:w,:h,x1:x,y1:y,x2:x+w,y2:y+h}
     
 Camera
