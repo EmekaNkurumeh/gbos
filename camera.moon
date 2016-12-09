@@ -12,7 +12,7 @@ class Camera
     juno.graphics.drawBuffer screen,0,0,{x:@_x,y:@_y,w:@_w,h:@_h},@_rot,@_sx,@_sy
 
   unset: (screen) =>
-    screen:reset()
+    screen\reset()
     juno.graphics.reset()
 
   move: (dx,dy) =>
