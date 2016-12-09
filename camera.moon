@@ -1,11 +1,13 @@
 class Camera
-  X: (@_x) =>
+  X: (x) =>
+    @_x = if @_bounds then @@clamp x,@_bounds.x1,@_bounds.x2 else x
 
-  Y: (@_y) =>
+  Y: (y) =>
+    @_y = if @_bounds then @@clamp y,@_bounds.y1,@_bounds.y2 else y
   
   @@clamp: (_, min, max) => (_ < min) and min or (_ > max and max) or _
   
-  new: (pos,size,scale,@rot) =>
+  new: (pos,size,scale,@_rot) =>
     @_x,@_y = pos.x,pos.y
     @_w,@_h = size.x,size.y
     @_sx,@_sy = scale.x,scale.y
@@ -36,5 +38,10 @@ class Camera
   setScale: (dsx,dsy) =>
     @_sx = dsx or @_sx
     @_sy = dsy or @_sy
+   
+  getBounds: => (table.unpack or unpack) @_bounds
+   
+  setBounds: (x,y,w,h) =>
+    @_bounds = {:w,:h,:x1,:y1,x2:x+w,y2:y+h}
     
 Camera
