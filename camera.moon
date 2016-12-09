@@ -1,34 +1,40 @@
 class Camera
+  X: (@_x) =>
+
+  Y: (@_y) =>
+  
+  @@clamp: (_, min, max) => (_ < min) and min or (_ > max and max) or _
+  
   new: (pos,size,scale,@rot) =>
-    @x,@y = pos.x,pos.y
-    @w,@h = size.x,size.y
-    @sx,@sy = scale.x,scale.y
+    @_x,@_y = pos.x,pos.y
+    @_w,@_h = size.x,size.y
+    @_sx,@_sy = scale.x,scale.y
 
   set: (screen) =>
-    juno.graphics.drawBuffer screen,0,0,{x:@x,y:@y,w:@w,h:@h},@rot,@sx,@sy
+    juno.graphics.drawBuffer screen,0,0,{x:@_x,y:@_y,w:@_w,h:@_h},@_rot,@_sx,@_sy
 
   unset: (screen) =>
     screen:reset()
     juno.graphics.reset()
 
   move: (dx,dy) =>
-    @x += (dx or 0)
-    @y += (dy or 0)
+    @_x += (dx or 0)
+    @_y += (dy or 0)
   
   rotate: (dr) =>
-    @rot += dr
+    @_rot += dr
 
   zoom: (dsx,dsy) =>
     dsx or= 1
-    @sx *= dsx
-    @sy *= (dsy or dsx)
-  
+    @_sx *= dsx
+    @_sy *= (dsy or dsx)
+
   goto: (x,y) =>
-    @x or= x
-    @y or= y
+    if x then @X x
+    if y then @Y y
   
   setScale: (dsx,dsy) =>
-    @sx = dsx or @sx
-    @sy = dsy or @sy
+    @_sx = dsx or @_sx
+    @_sy = dsy or @_sy
     
 Camera
