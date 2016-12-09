@@ -1,11 +1,7 @@
 class Camera
-  X: (x) =>
-    @_x = if @_bounds then @@clamp x,@_bounds.x1,@_bounds.x2 else x
-
-  Y: (y) =>
-    @_y = if @_bounds then @@clamp y,@_bounds.y1,@_bounds.y2 else y
   
-  @@clamp: (_, min, max) => (_ < min) and min or (_ > max and max) or _
+  @@clamp: (_, min, max) -> 
+    (_ < min) and min or (_ > max and max) or _
   
   new: (pos,size,scale,@_rot) =>
     @_x,@_y = pos.x,pos.y
@@ -30,7 +26,13 @@ class Camera
     dsx or= 1
     @_sx *= dsx
     @_sy *= (dsy or dsx)
+  
+  setX: (x) =>
+    @_x = if @_bounds then @@clamp x,@_bounds.x1,@_bounds.x2 else x
 
+  setY: (y) =>
+    @_y = if @_bounds then @@clamp y,@_bounds.y1,@_bounds.y2 else y
+  
   goto: (x,y) =>
     if x then @X x
     if y then @Y y
