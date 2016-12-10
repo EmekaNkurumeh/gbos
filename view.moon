@@ -1,4 +1,4 @@
-class Camera
+class View
   
   @@clamp = (_, min, max) => 
     (_ < min) and min or (_ > max and max) or _
@@ -46,4 +46,4 @@ class Camera
   setBounds: (x,y,w,h) =>
     @_bounds = {:w,:h,x1:x,y1:y,x2:x+w,y2:y+h}
     
-Camera
+View
