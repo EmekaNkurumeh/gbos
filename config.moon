@@ -2,7 +2,7 @@ export G = {
   title: "gamebox",
   width: 128,
   height: 128,
-  scale: 128
+  scale: 4
 }
 
 {
