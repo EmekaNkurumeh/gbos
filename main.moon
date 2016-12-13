@@ -1,5 +1,6 @@
 Renderer = require "renderer"
 GameLoop = require "gameloop"
+stalker = require "lib.stalker"
 
 juno.onLoad = () ->
   G.Renderer = Renderer!
@@ -10,7 +11,7 @@ juno.onLoad = () ->
 
 juno.onUpdate = (dt) ->
   G.time += dt
-  (require "stalker").update dt
+  stalker.update dt
   G.GameLoop\update(dt)
   return
 
