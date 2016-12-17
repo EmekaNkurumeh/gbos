@@ -143,13 +143,13 @@ function stalker.onerror(e, nostacktrace)
     end
     local function drawtext(str, x, y, color)
       canvas:setColor(unpack(color))
-      canvas:drawText(juno.Font.fromFile("data/font/m3x6.ttf",32),str, x, y)
+      canvas:drawText(juno.Font.fromEmbedded(12),str, x, y)
     end
     juno.graphics.setColor(unpack(colors[1]))
     canvas:clear()
 
     drawtext("An error has occurred", pad, pad, colors[2])
-    drawtext("stalker", width - (juno.Font.fromFile("data/font/m3x6.ttf",32)):getWidth("stalker") -
+    drawtext("stalker", width - (juno.Font.fromEmbedded(12)):getWidth("stalker") -
              pad, pad, colors[4])
     drawhr(pad + 32, colors[4], colors[5])
     drawtext("Fix the error, save the file, and the program will " ..
@@ -158,6 +158,7 @@ function stalker.onerror(e, nostacktrace)
     drawtext(msg, pad, pad + 90, colors[5], width - pad * 2)
     juno.graphics.copyPixels(canvas, 0, 0, nil, 1)
     canvas:reset()
+    juno.graphics.reset()
   end
 end
 
