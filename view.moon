@@ -1,15 +1,14 @@
 class View
 
-  @@clamp = (_, min, max) =>
-    (_ < min) and min or (_ > max and max) or _
-
-  new: (pos,size,scale,@_rot) =>
+  new: (pos,size,scale,@_rot=0) =>
     @_x,@_y = pos.x,pos.y
     @_w,@_h = size.x,size.y
     @_sx,@_sy = scale.x,scale.y
 
-  set: (screen,drx=0,dry=0) =>
+  set: (screen,drx=0,dry=0,color) =>
+    juno.graphics.clear(unpack color)
     juno.graphics.drawBuffer screen,drx,dry,{x:@_x,y:@_y,w:@_w,h:@_h},@_rot,@_sx,@_sy
+    screen\clear!
 
   unset: (screen) =>
     screen\reset()
@@ -28,10 +27,10 @@ class View
     @_sy *= (dsy or dsx)
 
   setX: (x) =>
-    @_x = if @_bounds then @@clamp x,@_bounds.x1,@_bounds.x2 else x
+    @_x = if @_bounds then math.clamp x,@_bounds.x1,@_bounds.x2 else x
 
   setY: (y) =>
-    @_y = if @_bounds then @@clamp y,@_bounds.y1,@_bounds.y2 else y
+    @_y = if @_bounds then math.clamp y,@_bounds.y1,@_bounds.y2 else y
 
   goTo: (x,y) =>
     if x then @setX x
