@@ -1,11 +1,11 @@
 class Layer
-  new: (width,height,@scale) =>
+  new: (@scale,width,height) =>
     @buffer = juno.Buffer.fromBlank width,height
-    @width = @buffer/getWidth!
-    @height = @buffer/getHeight!
+    @width = @buffer\getWidth!
+    @height = @buffer\getHeight!
 
-  draw: (obj,x,y,box,rot,sx,sy) =>
-    @buffer/draw obj,x or 0,y or 0,box and {x:box.x,y:box.y,w:box.w,h:box.h} or nil,rot or 0,sx or 1,sy or 1
+  draw: (obj,x = 0,y = 0,box,rot = 0,sx = 1,sy = 1) =>
+    @buffer\draw obj,x,y,box and {x:box.x,y:box.y,w:box.w,h:box.h} or nil,rot,sx,sy
 
 class View
   new: (pos,size,scale,@_rot=0) =>
@@ -19,23 +19,21 @@ class View
     table.insert @layers, layer
     table.sort @layers, ((a, b) -> a.scale < b.scale)
 
-  set: (obj,x,y,box,rot,sx,sy) =>
-    @canvas\draw obj,x or 0,y or 0,box and {x:box.x,y:box.y,w:box.w,h:box.h} or nil,rot or 0,sx or 1,sy or 1
+  set: (obj,x,y,sx = @_sx,sy = @_sy) =>
+    @canvas\draw obj,x,y,{x:@_x,y:@_y,w:@_w,h:@_h},@_rot,sx,sy
 
   unset: () =>
     @canvas\clear!
 
   draw: (screen,drx=0,dry=0) =>
-    ox,oy = @_x,@_y
     for layer in *@layers
-      ox = @_x * layer.scale
-      oy = @_y * layer.scale
-      @set layer.buffer,ox,oy
+      @set layer.buffer,@_x,@_y,layer.scale,layer.scale
+    @canvas\drawBox @_x,@_y,@_w,@_h
     if not screen
       juno.graphics.drawBuffer @canvas,drx,dry
     elseif screen
       screen\drawBuffer @canvas, drx, dry
-
+    @canvas\clear!
 
   move: (dx,dy) =>
     @_x += (dx or 0)
@@ -68,4 +66,7 @@ class View
   setBounds: (x,y,w,h) =>
     @_bounds = {:w,:h,x1:x,y1:y,x2:x+w,y2:y+h}
 
-View
+{
+  :View,
+  :Layer
+}
