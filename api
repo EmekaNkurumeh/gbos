@@ -1,0 +1,193 @@
+{
+   Data: {
+      __gc: function: 0x14896068
+      fromFile: function: 0x14896090
+      getLength: function: 0x14896030
+      fromString: function: 0x148978d0
+      toString: function: 0x14897960
+      __index: table: 0x14896008
+   }
+   getVersion: function: 0x14895f98
+   _pcall: function: 0x148a2a60
+   mouse: {
+      isDown: function: 0x148a14a0
+      wasPressed: function: 0x148a14c0
+      setVisible: function: 0x1489b7c0
+      _onEvent: function: 0x148a0578
+      reset: function: 0x148a1480
+      getPosition: function: 0x148a14e0
+      setPosition: function: 0x1489b810
+      getX: function: 0x148a1500
+      getY: function: 0x148a1520
+   }
+   Source: {
+      __gc: function: 0x14897240
+      setPan: function: 0x14897520
+      getLength: function: 0x14897208
+      pause: function: 0x14897710
+      getState: function: 0x14897370
+      setDestination: function: 0x14897488
+      setRate: function: 0x148973c0
+      stop: function: 0x14897758
+      setGain: function: 0x148974d8
+      play: function: 0x14897450
+      fromData: function: 0x14897268
+      setLoop: function: 0x14897408
+      fromBlank: function: 0x148972b8
+      setCallback: function: 0x148972e0
+      __index: table: 0x148971e0
+   }
+   system: {
+      info: function: 0x14898378
+      poll: function: 0x14897c48
+   }
+   audio: {
+      init: function: 0x1489b128
+      master: userdata: 0x148977b8
+   }
+   fs: {
+      append: function: 0x14899eb0
+      getSize: function: 0x14899d38
+      delete: function: 0x14899ef8
+      isDir: function: 0x14899df8
+      unmount: function: 0x14899c58
+      getModified: function: 0x14899d80
+      exists: function: 0x14899cf0
+      mount: function: 0x14899c10
+      setWritePath: function: 0x14899ca0
+      write: function: 0x14899e88
+      read: function: 0x14899dd0
+      listDir: function: 0x14899e40
+      makeDirs: function: 0x14899f40
+   }
+   _onAudio: function: 0x148933e0
+   onUpdate: function: 0x148f00c0
+   time: {
+      getAverage: function: 0x1489d580
+      getNow: function: 0x1489a5e0
+      getTime: function: 0x1489a628
+      getDelta: function: 0x1489d560
+      sleep: function: 0x1489a670
+      step: function: 0x1489d4e0
+      getFps: function: 0x1489d5a0
+   }
+   Buffer: {
+      __gc: function: 0x14890080
+      copyPixels: function: 0x14896d38
+      setBlend: function: 0x14890360
+      fromString: function: 0x148900d0
+      drawText: function: 0x1489cf30
+      fromFile: function: 0x148900a8
+      getWidth: function: 0x148902c0
+      getSize: function: 0x1489d120
+      setClip: function: 0x14890400
+      fromBlank: function: 0x14890160
+      draw: function: 0x14897178
+      __index: table: 0x14890020
+      drawCircle: function: 0x148970d8
+      reset: function: 0x148900f8
+      setColor: function: 0x148903b0
+      clone: function: 0x148901b0
+      drawBox: function: 0x14896cf0
+      drawRect: function: 0x14896ca0
+      drawPixel: function: 0x14896c00
+      drawLine: function: 0x14896c50
+      floodFill: function: 0x14896bb0
+      getPixel: function: 0x14890220
+      noise: function: 0x14896d88
+      setPixel: function: 0x14890270
+      setAlpha: function: 0x14890310
+      drawBuffer: function: 0x14897128
+      clear: function: 0x148901f8
+      getHeight: function: 0x148902e8
+   }
+   onKeyDown: function: 0x148eff28
+   onError: function: 0x14894c68
+   onDraw: function: 0x148f0100
+   graphics: {
+      init: function: 0x1489f3b8
+      setColor: function: 0x148aabc8
+      setMaxFps: function: 0x1489ad80
+      drawCircle: function: 0x148ad698
+      getPixel: function: 0x1488f8c0
+      drawBuffer: function: 0x148a7418
+      floodFill: function: 0x1488f878
+      __gc: function: 0x1489fca0
+      copyPixels: function: 0x148ab9f0
+      setFullscreen: function: 0x1489ad30
+      setBlend: function: 0x148aa3b0
+      getWidth: function: 0x14896940
+      _clearColor: {
+         1: 0
+         2: 0
+         3: 0
+      }
+      setClearColor: function: 0x1489eac8
+      getHeight: function: 0x148adb88
+      __index: function: 0x148a4258
+      clear: function: 0x148adbd0
+      reset: function: 0x148ad6e0
+      drawBox: function: 0x148a99f0
+      clone: function: 0x148a99c8
+      setAlpha: function: 0x148a73d0
+      setPixel: function: 0x148a7388
+      screen: userdata: 0x148ab0e0
+      noise: function: 0x1488f908
+      getSize: function: 0x148abe20
+      drawPixel: function: 0x148a2598
+      draw: function: 0x148a26e0
+      drawRect: function: 0x148a9a38
+      setClip: function: 0x148abe48
+      drawLine: function: 0x148a25e0
+      drawText: function: 0x148a2c28
+   }
+   Gif: {
+      __gc: function: 0x14897840
+      new: function: 0x14897868
+      close: function: 0x14897808
+      update: function: 0x14897890
+      __index: table: 0x14897918
+   }
+   _onStep: function: 0x148a0500
+   bufferfx: {
+      desaturate: function: 0x1489c4b0
+      dissolve: function: 0x1489c520
+      blur: function: 0x1489c650
+      wave: function: 0x1489c5b8
+      mask: function: 0x1489c570
+      palette: function: 0x14891d20
+      displace: function: 0x1489c600
+   }
+   Font: {
+      __gc: function: 0x148960d0
+      fromFile: function: 0x148960f8
+      render: function: 0x14896228
+      fromEmbedded: function: 0x1488ffe0
+      __index: table: 0x1488ffb8
+      fromString: function: 0x14896148
+      getWidth: function: 0x14896198
+      getHeight: function: 0x14896338
+   }
+   debug: {
+      getFocused: function: 0x148a3628
+      getVisible: function: 0x148a3520
+      _draw: function: 0x148a3450
+      removeIndicator: function: 0x148a3418
+      _onEvent: function: 0x148a33c8
+      addIndicator: function: 0x148a3668
+      setFocused: function: 0x148a3540
+      clear: function: 0x148a3648
+      setVisible: function: 0x148a3470
+   }
+   keyboard: {
+      isDown: function: 0x148a08c0
+      reset: function: 0x148a08a0
+      wasPressed: function: 0x1489fc58
+      _onEvent: function: 0x1489f950
+   }
+   _argv: {
+      1: juno
+      2: .
+   }
+   onLoad: function: 0x148ed028
+}

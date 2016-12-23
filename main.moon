@@ -27,6 +27,6 @@ juno.onKeyDown = (k) ->
 juno.onDraw = () ->
   G.view\set G.screen, nil, nil, {23/255, 16/255, 54/255}
   G.screen\drawCircle 64,64,8,unpack{1,0,0}
-  G.Renderer\draw!
+  -- G.Renderer\draw!
   G.view\unset G.screen
   return

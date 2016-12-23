@@ -12,6 +12,15 @@ math.clamp = (_, min, max) ->
 math.tau = math.pi * 2
 v2 = require "vec2"
 
+table.merge = (...) ->
+  res = {}
+  for i = 1, select "#", ... do
+    t = select i, ...
+    if t 
+      for k, v in pairs t do
+        res[k] = v
+  res
+
 {
   title: G.title,
   width: G.width * G.scale,
