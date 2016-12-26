@@ -1,7 +1,8 @@
 Renderer = require "renderer"
 GameLoop = require "gameloop"
 stalker = require "lib.stalker"
-import View, Layer from require "view"
+View = require "view"
+Layer = require "layer"
 
 juno.onLoad = () ->
   G.View = View(v2(0,0),v2(128,128),v2(G.scale,G.scale))

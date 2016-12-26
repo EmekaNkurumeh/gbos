@@ -1,12 +1,3 @@
-class Layer
-  new: (@scale,width,height) =>
-    @buffer = juno.Buffer.fromBlank width,height
-    @width = @buffer\getWidth!
-    @height = @buffer\getHeight!
-
-  draw: (obj,x = 0,y = 0,box,rot = 0,sx = 1,sy = 1) =>
-    @buffer\draw obj,x,y,box and {x:box.x,y:box.y,w:box.w,h:box.h} or nil,rot,sx,sy
-
 class View
   new: (pos,size,scale,@_rot=0) =>
     @_x,@_y = pos.x,pos.y
@@ -66,7 +57,4 @@ class View
   setBounds: (x,y,w,h) =>
     @_bounds = {:w,:h,x1:x,y1:y,x2:x+w,y2:y+h}
 
-{
-  :View,
-  :Layer
-}
+View
