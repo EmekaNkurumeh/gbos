@@ -23,8 +23,8 @@ class View
     if not screen
       juno.graphics.drawBuffer @canvas,drx,dry
     elseif screen
-      screen\drawBuffer @canvas, drx, dry
-    @canvas\clear!
+      screen\drawBuffer @canvas, drx, dry,
+    -- @unsets
 
   move: (dx,dy) =>
     @_x += (dx or 0)

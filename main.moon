@@ -5,7 +5,7 @@ View = require "view"
 Layer = require "layer"
 
 juno.onLoad = () ->
-  G.View = View(v2(0,0),v2(128,128),v2(G.scale,G.scale))
+  G.View = View(v2(0,0),v2(512,512),v2(G.scale,G.scale))
   G.Renderer = Renderer!
   G.GameLoop = GameLoop!
   return

@@ -1,9 +1,8 @@
+xpcall (-> require "moonscript"), (-> os.exit!)
+
 export *
-
-xpcall(->require "moonscript",->)
-
 G = {
-  title: "gamebox",
+  title: "gbos",
   width: 128,
   height: 128,
   scale: 4,

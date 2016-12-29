@@ -198,14 +198,14 @@ end
 
 function stalker.getchanged()
   local function fn(f)
-    return (f:match("%.lua$") or f:match("%.moon$")) and stalker.files[f] ~= lastmodified(f)
+    return f:match("%.lua$") and stalker.files[f] ~= lastmodified(f)
   end
   return lume.filter(stalker.listdir(stalker.path, true, true), fn)
 end
 
 
 function stalker.modname(f)
-  return (f:gsub("%.lua$", ""):gsub("[/\\]", ".")) or (f:gsub("%.moon$", ""):gsub("[/\\]", "."))
+  return (f:gsub("%.lua$", ""):gsub("[/\\]", "."))
 end
 
 
@@ -225,7 +225,7 @@ function stalker.hotswapfile(f)
     return
   end
   local modname = stalker.modname(f)
-  local t, ok, err = lume.time(function(modname)xpcall(function(modname)lume.hotswap)end, modname)
+  local t, ok, err = lume.time(lume.hotswap, modname)
   if ok then
     stalker.print("Swapped '{1}' in {2} secs", {f, t})
   else
