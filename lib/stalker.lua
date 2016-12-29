@@ -225,7 +225,7 @@ function stalker.hotswapfile(f)
     return
   end
   local modname = stalker.modname(f)
-  local t, ok, err = lume.time(lume.hotswap, modname)
+  local t, ok, err = lume.time(function(modname)xpcall(function(modname)lume.hotswap)end, modname)
   if ok then
     stalker.print("Swapped '{1}' in {2} secs", {f, t})
   else
