@@ -1,4 +1,5 @@
 export *
+require "moonscript"
 G = {
   title: "gamebox",
   width: 128,
