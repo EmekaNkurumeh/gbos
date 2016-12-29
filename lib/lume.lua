@@ -7,8 +7,6 @@
 -- under the terms of the MIT license. See LICENSE for details.
 --
 
-xpcall(function() require "moonscript" end,functon()end)
-
 local lume = { _version = "2.2.3" }
 
 local pairs, ipairs = pairs, ipairs

@@ -1,6 +1,6 @@
 export *
 
-xpcall(function()require "moonscript"end,function()end)
+xpcall(->require "moonscript",->)
 
 G = {
   title: "gamebox",
