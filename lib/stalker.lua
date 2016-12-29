@@ -198,14 +198,14 @@ end
 
 function stalker.getchanged()
   local function fn(f)
-    return f:match("%.lua$") and stalker.files[f] ~= lastmodified(f)
+    return (f:match("%.lua$") or f:match("%.moon$")) and stalker.files[f] ~= lastmodified(f)
   end
   return lume.filter(stalker.listdir(stalker.path, true, true), fn)
 end
 
 
 function stalker.modname(f)
-  return (f:gsub("%.lua$", ""):gsub("[/\\]", "."))
+  return (f:gsub("%.lua$", ""):gsub("[/\\]", ".")) or (f:gsub("%.moon$", ""):gsub("[/\\]", "."))
 end
 
 
