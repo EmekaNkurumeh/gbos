@@ -4,11 +4,11 @@ class Layer
     @width = @buffer\getWidth!
     @height = @buffer\getHeight!
 
-  draw: (obj,x = 0,y = 0,box,rot = 0,sx = 1,sy = 1) =>
-    @buffer\draw obj,x,y,box and {x:box.x,y:box.y,w:box.w,h:box.h} or nil,rot,sx,sy
+  draw: (obj,x = 0,y = 0,box,sx = 1,sy = 1) =>
+    @buffer\copyPixels obj,x,y,box and {x:box.x,y:box.y,w:box.w,h:box.h} or nil,sx,sy
 
 class View
-  new: (pos,size,scale,@_rot=0) =>
+  new: (pos,size,scale,) =>
     @_x,@_y = pos.x,pos.y
     @_w,@_h = size.x,size.y
     @_sx,@_sy = scale.x,scale.y
@@ -20,7 +20,7 @@ class View
     table.sort @layers, ((a, b) -> a.scale < b.scale)
 
   set: (obj,x,y,sx = @_sx,sy = @_sy) =>
-    @canvas\draw obj,x,y,{x:@_x,y:@_y,w:@_w,h:@_h},@_rot,sx,sy
+    @canvas\copyPixels obj,x,y,{x:@_x,y:@_y,w:@_w,h:@_h},sx,sy
 
   unset: () =>
     @canvas\clear!
@@ -38,9 +38,6 @@ class View
   move: (dx,dy) =>
     @_x += (dx or 0)
     @_y += (dy or 0)
-
-  rotate: (dr) =>
-    @_rot += dr
 
   zoom: (dsx,dsy) =>
     dsx or= 1

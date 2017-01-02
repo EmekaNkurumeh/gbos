@@ -9,120 +9,120 @@ typeof = (val) ->
   xval
 class vec2
   new: (@x,@y) => @x,@y
-  
-  __add: (v) => 
+
+  __add: (v) =>
     if typeof(v) == "vec2"
       vec2 @x+v.x,@y+v.y
-    else 
+    else
       vec2 @x+v,@y+v
-      
-  __sub: (v) =>  
+
+  __sub: (v) =>
     if typeof(v) == "vec2"
       vec2 @x-v.x,@y-v.y
-    else 
+    else
       vec2 @x-v,@y-v
-      
-  __mul: (v) =>  
+
+  __mul: (v) =>
     if typeof(v) == "vec2"
       vec2 @x*v.x,@y*v.y
-    else 
+    else
       vec2 @x*v,@y*v
-      
-  __div: (v) =>  
+
+  __div: (v) =>
     if typeof(v) == "vec2"
       vec2 @x/v.x,@y/v.y
-    else 
+    else
       vec2 @x/v,@y/v
-      
-  __mod: (v) =>  
+
+  __mod: (v) =>
     if typeof(v) == "vec2"
       vec2 @x%v.x,@y%v.y
-    else 
+    else
       vec2 @x%v,@y%v
-      
+
   __unm: => vec2 -@x,-@y
-  
-  __eq: (v) =>  
+
+  __eq: (v) =>
     if typeof(v) == "vec2"
       if @x == v.x and @y == v.y then true else false
-    else 
+    else
       if @x+@y == v then true else false
-      
-  __lt: (v) =>  
+
+  __lt: (v) =>
     if typeof(v) == "vec2"
       if @x < v.x and @y < v.y then true else false
-    else 
+    else
       if @x+@y < v then true else false
-      
-  __le: (v) =>  
+
+  __le: (v) =>
     if typeof(v) == "vec2"
-      if @x <= v.x and @y <= v.y then true else false 
-    else 
+      if @x <= v.x and @y <= v.y then true else false
+    else
       if @x+@y <= v then true else false
-      
+
   __concat: (v) =>
-    if typeof(v) == "vec2" 
+    if typeof(v) == "vec2"
       vec2 tonumber("#{@x}#{v.x}"),tonumber("#{@y}#{v.y}")
     else
       vec2 tonumber("#{@x}#{v}"),tonumber("#{@y}#{v}")
-      
+
   __len: => @x+@y
-  
+
   __tostring: => "(#{@x},#{@y})"
-  
-  move: (v) => 
+
+  move: (v) =>
     if typeof(v) == "vec2"
       @x += v.x
       @y += v.y
-    else 
+    else
       @x += v
       @y += v
-  
+
   distance: (v) => math.sqrt ((@x-v.x)^2)+((@y-v.y)^2)
-  
+
   middle: (v) => vec2 (@x+v.x)/2,(@y+v.y)/2
-  
+
   clone: => @
-  
-  __eq: (v) =>  
+
+  __eq: (v) =>
     if typeof(v) == "vec2"
       if @x == v.x and @y == v.y then true else false
-    else 
+    else
       if @x+@y == v then true else false
-      
-  __lt: (v) =>  
+
+  __lt: (v) =>
     if typeof(v) == "vec2"
       if @x < v.x and @y < v.y then true else false
-    else 
+    else
       if @x+@y < v then true else false
-      
-  __le: (v) =>  
+
+  __le: (v) =>
     if typeof(v) == "vec2"
-      if @x <= v.x and @y <= v.y then true else false 
-    else 
+      if @x <= v.x and @y <= v.y then true else false
+    else
       if @x+@y <= v then true else false
-      
+
   __concat: (v) =>
-    if typeof(v) == "vec2" 
+    if typeof(v) == "vec2"
       vec2 tonumber("#{@x}#{v.x}"),tonumber("#{@y}#{v.y}")
     else
       vec2 tonumber("#{@x}#{v}"),tonumber("#{@y}#{v}")
-      
+
   __len: => @x+@y
-  
+
   __tostring: => "(#{@x},#{@y})"
-  
-  move: (v) => 
+
+  move: (v) =>
     if typeof(v) == "vec2"
       @ += v
-    else 
+    else
       @x += v
       @y += v
-  
+
   distance: (v) => math.sqrt ((@x-v.x)^2)+((@y-v.y)^2)
-  
+
   middle: (v) => vec2 (@x+v.x)/2,(@y+v.y)/2
-  
+
   clone: => @
-  
+
 vec2

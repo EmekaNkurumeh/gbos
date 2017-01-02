@@ -1,3 +1,4 @@
+dofile("init.lua")
 xpcall (-> require "moonscript"), (-> os.exit!)
 
 export *
