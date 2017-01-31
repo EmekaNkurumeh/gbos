@@ -26,8 +26,8 @@ https://raw.githubusercontent.com/rxi/lovedos/master/doc/api.md
 #### `juno.onLoad()`
 #### `juno.onUpdate(dt)`
 #### `juno.onDraw()`
-#### `juno.onKeyDown(key, char)`
-#### `juno.onKeyUp(key)`
+#### `juno.onKeyDown(key)`
+#### `juno.onKeyUp(key, char)`
 #### `juno.onMouseMove(x,y)`
 #### `juno.onMouseDown(x, y, button)`
 #### `juno.onMouseUp(x, y, button)`
@@ -169,7 +169,7 @@ https://raw.githubusercontent.com/rxi/lovedos/master/doc/api.md
 #### `juno.graphics.getSize()`
 #### `juno.graphics.drawPixel(x, y, r, g, b, a)`
 #### `juno.graphics.drawPixel(x, y, r, g, b, a)`
-#### `juno.graphics.draw(src, x, y, sub, rot, sx, sy, ox, oy)
+#### `juno.graphics.draw(src, x, y, sub, rot, sx, sy, ox, oy)`
 #### `juno.graphics.drawRect(x, y, w, h, r, g, b, a)`
 #### `juno.graphics.setClip(x, y, w, h)`
 #### `juno.graphics.drawLine(x1, y1, x2, y2, r, g, b, a)`
