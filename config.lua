@@ -1,5 +1,5 @@
-dofile("init.lua")
 xpcall((function()
+  dofile("init.lua")
   return require("moonscript")
 end), (function()
   return os.exit()
@@ -11,11 +11,11 @@ G = {
   scale = 4,
   tick = 0
 }
+v2 = require("vec2")
 math.clamp = function(_, min, max)
   return (_ < min) and min or (_ > max and max) or _
 end
 math.tau = math.pi * 2
-v2 = require("vec2")
 table.merge = function(...)
   local res = { }
   for i = 1, select("#", ...) do

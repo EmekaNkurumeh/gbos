@@ -1,8 +1,9 @@
-dofile("init.lua")
-xpcall (-> require "moonscript"), (-> os.exit!)
+xpcall (->
+  dofile "init.lua"
+  require "moonscript"),
+  (-> os.exit!)
 
-export *
-G = {
+export G = {
   title: "gbos",
   width: 128,
   height: 128,
@@ -10,10 +11,12 @@ G = {
   tick: 0,
 }
 
+export v2 = require "vec2"
+
 math.clamp = (_, min, max) ->
   (_ < min) and min or (_ > max and max) or _
+
 math.tau = math.pi * 2
-v2 = require "vec2"
 
 table.merge = (...) ->
   res = {}

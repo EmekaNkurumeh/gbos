@@ -1,3 +1,2 @@
 .gitignore
-!moon = |> moonc51 %f |>
-: foreach *.moon |> !moon |> %B.lua
+!moonc = |> moonc51 %f |>

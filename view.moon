@@ -8,7 +8,7 @@ class Layer
     @buffer\copyPixels obj,x,y,box and {x:box.x,y:box.y,w:box.w,h:box.h} or nil,sx,sy
 
 class View
-  new: (pos,size,scale,) =>
+  new: (pos,size,scale) =>
     @_x,@_y = pos.x,pos.y
     @_w,@_h = size.x,size.y
     @_sx,@_sy = scale.x,scale.y

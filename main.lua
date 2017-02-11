@@ -10,6 +10,7 @@ juno.onLoad = function()
   G.View = View(v2(0, 0), v2(512, 512), v2(G.scale, G.scale))
   G.Renderer = Renderer()
   G.GameLoop = GameLoop()
+  G.image = juno.Buffer.fromFile("data/images/sheet.png")
 end
 juno.onUpdate = function(dt)
   G.tick = G.tick + 1
@@ -30,4 +31,10 @@ juno.onKeyDown = function(k)
 end
 juno.onDraw = function()
   G.View:draw(nil, 0, 0)
+  juno.graphics.copyPixels(G.image, 0, 0, {
+    x = 1,
+    y = 1,
+    w = 15,
+    h = 15
+  }, 19)
 end
