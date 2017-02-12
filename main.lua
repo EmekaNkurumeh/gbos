@@ -1,16 +1,19 @@
-local Renderer = require("renderer")
-local GameLoop = require("gameloop")
+local Renderer = require("core.renderer")
+local GameLoop = require("core.gameloop")
 local stalker = require("lib.stalker")
 local Layer, View
 do
-  local _obj_0 = require("view")
+  local _obj_0 = require("core.view")
   Layer, View = _obj_0.Layer, _obj_0.View
 end
+local Save
+Save = require("core.save").Save
 juno.onLoad = function()
   G.View = View(v2(0, 0), v2(512, 512), v2(G.scale, G.scale))
   G.Renderer = Renderer()
   G.GameLoop = GameLoop()
   G.image = juno.Buffer.fromFile("data/images/sheet.png")
+  G.Save = Save("save.ini")
 end
 juno.onUpdate = function(dt)
   G.tick = G.tick + 1
@@ -37,4 +40,7 @@ juno.onDraw = function()
     w = 15,
     h = 15
   }, 19)
+end
+juno.onQuit = function()
+  return G.Save:close()
 end

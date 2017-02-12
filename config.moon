@@ -9,9 +9,10 @@ export G = {
   height: 128,
   scale: 4,
   tick: 0,
+  indentity: "gbos"
 }
 
-export v2 = require "vec2"
+export v2 = require "core.vec2"
 
 math.clamp = (_, min, max) ->
   (_ < min) and min or (_ > max and max) or _

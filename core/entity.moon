@@ -20,9 +20,9 @@ class Entity
     @frame = 0
     @animations = {}
     @anim_timer = 0
-    @tween = flux.group()
-    @timer = tick.group()
-    @task = coil.group()
+    @tween = flux.group!
+    @timer = tick.group!
+    @task = coil.group!
 
   updateMovement: (dt) =>
     if dt = 0 then return

@@ -9,9 +9,10 @@ G = {
   width = 128,
   height = 128,
   scale = 4,
-  tick = 0
+  tick = 0,
+  indentity = "gbos"
 }
-v2 = require("vec2")
+v2 = require("core.vec2")
 math.clamp = function(_, min, max)
   return (_ < min) and min or (_ > max and max) or _
 end
