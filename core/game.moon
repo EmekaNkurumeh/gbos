@@ -11,7 +11,7 @@ class Game
     @entities = {}
     @save = Save "save.ini"
     @screen = View v2(0, 0), v2(512, 512), v2(G.scale, G.scale)
-    @world = shash.new!
+    @world = shash.new 16
     @debug = {}
     juno.debug.addIndicator (-> "#{@world\info "entities"} entities", @world\info "entities"), 0, 1000
 
@@ -29,7 +29,7 @@ class Game
       @world\remove obj
 
   update: (dt) =>
-    for obj in *@entities do
+    for key, obj in pairs @entities do
       if obj.update then
         obj\update dt
 
@@ -45,8 +45,8 @@ class Game
         juno.onLoad!
 
   draw: =>
-    for obj in *@entities do
+    for key, obj in pairs @entities do
       if obj.visible then
-        @screen\set obj\draw!, 0, 0
-        
+        obj\draw @screen
+
     @screen\draw 0, 0

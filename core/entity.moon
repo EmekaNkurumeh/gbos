@@ -19,13 +19,25 @@ class Entity
     @visible = true
     @collidable = true
     @velocity = v2 1,1
-    @frame = 0
+    @frame = nil
     @animations = {}
     @anim_timer = 0
     @tween = flux.group!
     @timer = tick.group!
     @task = coil.group!
     @world\add @
+
+  newImage: (file, frames) =>
+    @image = png file
+    if frames
+      @animations.frames = json(file).frames
+
+  addAnimation: (name, start, stop) =>
+    @animations[name] =  {:start, :stop}
+
+  setAnimation: (name) =>
+    @frame_counter = 0
+    @frame = @animations[name]
 
   setX: (@x = @x) => G.Game.world\update @, @x, @y, @w, @h
 
@@ -47,11 +59,22 @@ class Entity
     @y += @velocity.y * dt
 
   update: (dt) =>
-    @world\each @, (obj) -> 
+    @world.world\each @, (obj) ->
       obj.x = @x
       obj.y = @y
 
-  draw: =>
-    
+    @anim_timer += dt
+    if @anim_timer > .100
+      if @frame_counter < @frame.stop - @frame.start
+        @frame_counter += 1
+      else
+        @frame_counter = 0
+      @anim_timer = 0
+
+  draw: (screen) =>
+    -- screen\set @image, @x, @y, nil, @scale.x, @scale.y
+    frame = @animations.frames[@frame.start + @frame_counter].frame
+    screen\set @image, @x, @y, frame, @scale.x, @scale.y
+
 
 Entity
