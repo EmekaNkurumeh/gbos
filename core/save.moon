@@ -1,3 +1,5 @@
+lume = require "lib.lume"
+
 class Save
   new: (@name, @data = {}) =>
     data = {}
@@ -26,7 +28,7 @@ class Save
     else
       juno.fs.write @name, " "
 
-    @data = table.merge data, @data
+    @data = lume.extend @data, data
 
   get: (key) =>
     @data[key]

@@ -7,13 +7,8 @@ loadkit = require "lib.loadkit"
 
 export v2 = require "core.vec2"
 
-export list = require "lib.list"
-
 export png = loadkit.make_loader "png", (data) ->
     juno.Buffer.fromString data\read "*a"
-
-export json = loadkit.make_loader "json", (data) ->
-    require"lib.json".decode data\read "*a"
 
 export G = {
   title: "gbos",

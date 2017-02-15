@@ -6,12 +6,8 @@ end), (function()
 end))
 local loadkit = require("lib.loadkit")
 v2 = require("core.vec2")
-list = require("lib.list")
 png = loadkit.make_loader("png", function(data)
   return juno.Buffer.fromString(data:read("*a"))
-end)
-json = loadkit.make_loader("json", function(data)
-  return require("lib.json").decode(data:read("*a"))
 end)
 G = {
   title = "gbos",

@@ -1,3 +1,5 @@
+lume = require "lib.lume"
+
 class View
   new: (pos, size, scale) =>
     @_x,@_y = pos.x, pos.y
@@ -6,7 +8,7 @@ class View
     @canvas = juno.Buffer.fromBlank @_w, @_h
 
   set: (obj, x, y, rect, sx = 1, sy = sx) =>
-    rect = table.merge {x: 0, y: 0, w: obj\getWidth!, h: obj\getHeight!}, rect
+    rect = lume.extend {x: 0, y: 0, w: obj\getWidth!, h: obj\getHeight!}, rect
     @canvas\copyPixels obj, x, y, rect, sx, sy
 
   unset: =>
@@ -26,10 +28,10 @@ class View
     @_sy *= (dsy or dsx)
 
   setX: (x) =>
-    @_x = if @_bounds then math.clamp x, @_bounds.x1, @_bounds.x2 else x
+    @_x = if @_bounds then lume.clamp x, @_bounds.x1, @_bounds.x2 else x
 
   setY: (y) =>
-    @_y = if @_bounds then math.clamp y, @_bounds.y1, @_bounds.y2 else y
+    @_y = if @_bounds then lume.clamp y, @_bounds.y1, @_bounds.y2 else y
 
   goTo: (x, y) =>
     if x then @setX x
