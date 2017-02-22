@@ -11,6 +11,8 @@ class Game
   new: =>
     @entities = {}
     @save = Save "save.ini"
+    @save\set({plays: (@save\get("plays") or 0) + 1})
+    print "plays: #{@save\get("plays")}"
     @screen = View v2(0, 0), v2(512, 512), v2(2,2)
     @world = shash.new 1
     @i = Entity @
@@ -27,7 +29,6 @@ class Game
 
   stop: =>
     @world\clear!
-    @save\close!
 
   add: (obj) =>
     @entities[obj] = obj

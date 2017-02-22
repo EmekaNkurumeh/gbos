@@ -66,7 +66,6 @@ class Entity
   updateMovement: (dt) =>
     if dt == 0 then return
     @world.world\each @, (obj) ->
-      print "kds'"..math.random 1000
       @accel.x = -@accel.x
       @accel.y = -@accel.y
 
