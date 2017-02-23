@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec '/usr/local/bin/lua5.1' -e 'package.path="/Users/patiencenkurumeh/.luarocks/share/lua/5.1/?.lua;/Users/patiencenkurumeh/.luarocks/share/lua/5.1/?/init.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;"..package.path; package.cpath="/Users/patiencenkurumeh/.luarocks/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/?.so;"..package.cpath' -e 'local k,l,_=pcall(require,"luarocks.loader") _=k and l.add_context("moonscript","0.5.0-1")' '/Users/patiencenkurumeh/Dev/gbos/rocks/lib/luarocks/rocks-5.1/moonscript/0.5.0-1/bin/moon' "$@"

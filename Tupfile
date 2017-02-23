@@ -1,4 +1,0 @@
-include_rules
-
-: main.moon   |> !moonc       |> %B.lua
-: config.moon |> !moonc       |> %B.lua

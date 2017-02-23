@@ -71,8 +71,8 @@ function stalker.listdir(path, recursive, skipdotfiles)
   local t = {}
   for _, f in pairs(lume.map(dir(path), fullpath)) do
     if not skipdotfiles or not f:match("/%.[^/]*$") then
-      if recursive and isdir(f) then
-        t = lume.concat(t, stalker.listdir(f, true, true))
+      if recursive and isdir(f:sub(2, #f)) then
+        t = lume.concat(t, stalker.listdir(f:sub(2, #f), true, true))
       else
         table.insert(t, lume.trim(f, "/"))
       end
@@ -141,15 +141,15 @@ function stalker.onerror(e, nostacktrace)
       if color2 then canvas:setColor(unpack(color2)) end
       canvas:drawRect(animpos, pos, 8, 1)
     end
-    local function drawtext(str, x, y, color)
+    local function drawtext(str, x, y, color, width)
       canvas:setColor(unpack(color))
-      canvas:drawText(juno.Font.fromFile("data/font/default.ttf",16),str, x, y)
+      canvas:drawText(juno.Font.fromEmbedded(16), str, x, y, width)
     end
     juno.graphics.setColor(unpack(colors[1]))
     canvas:clear()
 
     drawtext("An error has occurred", pad, pad, colors[2])
-    drawtext("stalker", width - (juno.Font.fromFile("data/font/default.ttf",16)):getWidth("stalker") -
+    drawtext("stalker", width - (juno.Font.fromEmbedded(16)):getWidth("stalker") -
              pad, pad, colors[4])
     drawhr(pad + 32, colors[4], colors[5])
     drawtext("Fix the error and program will resume",
@@ -190,7 +190,7 @@ function stalker.update()
     if #changed > 0 and stalker.lasterrorfile then
       local f = stalker.lasterrorfile
       stalker.lasterrorfile = nil
-      stalker.hotswapfile(f)
+      -- stalker.hotswapfile(f)
     end
   end
 end
