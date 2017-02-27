@@ -1,4 +1,3 @@
-https://raw.githubusercontent.com/rxi/lovedos/master/doc/api.md
 # Juno API Reference
 
 ## [Callbacks](#callbacks-1)
