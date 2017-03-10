@@ -1,26 +1,27 @@
 local _ = require "lib.lume"
-local Object = require "lib.classic"
 local tick = require "lib.tick"
 local coil = require "lib.coil"
 local flux = require "lib.flux"
 local shash = require "lib.shash"
+local Rect = require "core.rect"
+local Game = require "core.game"
 
-local Entity = Object:extend()
+local Entity = Rect:extend()
 
-function Entity:new(world)
+function Entity:new()
   self.x = 0
   self.y = 0
   self.w = 16
   self.h = 16
   self.angle = 0
-  self.accel = v2(0,0)
-  self.scale = v2(1,1)
-  self.offset = v2(0,0)
+  self.accel = {x = 0, y = 0}
+  self.scale = {x = 1, y = 1}
+  self.offset = {x = 0, y = 0}
   self.solid = true
   self.moves = true
   self.visible = true
   self.collidable = true
-  self.velocity = v2(0,0)
+  self.velocity = {x = 0, y = 0}
   self.animation = nil
   self.frame_counter = 1
   self.animations = {}
@@ -28,8 +29,7 @@ function Entity:new(world)
   self.tween = flux.group()
   self.timer = tick.group()
   self.task = coil.group()
-  self.world = world
-  self.world:add(self)
+  Game.add(self)
 end
 
 function Entity:loadImage(file, w, h)
@@ -68,30 +68,30 @@ end
 
 function Entity:setX(x)
   self.x = x
-  self.world.world:update(self, self.x, self.y, self.w, self.h)
+  Game.world:update(self, self.x, self.y, self.w, self.h)
 end
 
 function Entity:setY(y)
   self.y = y
-  self.world.world:update(self, self.x, self.y, self.w, self.h)
+  Game.world:update(self, self.x, self.y, self.w, self.h)
 end
 
 function Entity:setWidth(w)
   self.w = w
-  self.world.world:update(self, self.x, self.y, self.w, self.h)
+  Game.world:update(self, self.x, self.y, self.w, self.h)
 end
 
 function Entity:setHeight(h)
   self.h = h
-  self.world.world:update(self, self.x, self.y, self.w, self.h)
+  Game.world:update(self, self.x, self.y, self.w, self.h)
 end
 
 function Entity:updateMovement(dt)
   if dt == 0 then return end
-  self.world.world:each(self, function(obj)
-    self.accel.x = -self.accel.x
-    self.accel.y = -self.accel.y
-  end)
+  -- Game.world:each(self, function(obj)
+  --   self.accel.x = -self.accel.x
+  --   self.accel.y = -self.accel.y
+  -- end)
 
   self.velocity.x = self.velocity.x + (self.accel.x * dt)
   self.velocity.y = self.velocity.y + (self.accel.y * dt)
@@ -107,10 +107,10 @@ function Entity:updateMovement(dt)
   self.x = self.x + (self.velocity.x * dt)
   self.y = self.y + (self.velocity.y * dt)
 
-  if self.accel.x == 0 then self.velocity.x = self.velocity.x - (self.velocity.x * .01)end
-  if self.accel.y == 0 then self.velocity.y = self.velocity.y - (self.velocity.y * .01) end
+  if self.accel.x == 0 then self.velocity.x = self.velocity.x - (self.velocity.x * .07)end
+  if self.accel.y == 0 then self.velocity.y = self.velocity.y - (self.velocity.y * .07) end
 
-  self.world.world:update(self, self.x, self.y, self.w, self.h)
+  Game.world:update(self, self.x, self.y, self.w, self.h)
 end
 
 function Entity:updateAnimation(dt)
@@ -136,8 +136,8 @@ function Entity:update(dt)
   self:updateAnimation(dt)
 end
 
-function Entity:draw(screen)
-  screen:set(self.image, self.x, self.y, self.frame, self.scale.x, self.scale.y)
+function Entity:draw()
+  Game.draw(self.image, self.x, self.y, self.frame, self.scale.x, self.scale.y)
 end
 
 return Entity

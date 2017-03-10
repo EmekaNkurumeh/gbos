@@ -3,11 +3,11 @@ local Object = require "lib.classic"
 
 local View = Object:extend()
 
-function View:new(pos, size, scale)
+function View:new(x, y, w, h, sx, sy)
   self.type = "view"
-  self._x, self._y = pos.x, pos.y
-  self._w, self._h = size.x, size.y
-  self._sx, self._sy = scale.x, scale.y
+  self._x, self._y = x, y
+  self._w, self._h = w, h
+  self._sx, self._sy = sx, sy
   self.canvas = juno.Buffer.fromBlank(self._w, self._h)
 end
 

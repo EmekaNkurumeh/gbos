@@ -1,7 +1,7 @@
 local loadkit = require("lib.loadkit")
 local _ = require("lib.lume")
 
-v2 = require("core.vec2")
+Vector = require("core.Vector")
 
 png = loadkit.make_loader("png", function(data)
   return juno.Buffer.fromString(data:read("*a"))
@@ -13,7 +13,8 @@ G = {
   height = 128,
   scale = 4,
   tick = 0,
-  debug = _.find(juno._argv, "--debug") or _.find(juno._argv, "-d") 
+  debug = true
+  -- debug = _.find(juno._argv, "--debug") or _.find(juno._argv, "-d")
 }
 
 return {
