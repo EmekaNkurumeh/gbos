@@ -1,12 +1,6 @@
 local loadkit = require("lib.loadkit")
 local _ = require("lib.lume")
 
-Vector = require("core.Vector")
-
-png = loadkit.make_loader("png", function(data)
-  return juno.Buffer.fromString(data:read("*a"))
-end)
-
 G = {
   title = "gbos",
   width = 128,

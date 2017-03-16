@@ -32,8 +32,12 @@ function Entity:new()
   Game.add(self)
 end
 
+local loadImage = _.memoize(function(...)
+  return juno.Buffer.fromFile(...)
+end)
+
 function Entity:loadImage(file, w, h)
-  self.image = png(file)
+  self.image = loadImage(file)
   local w = w or self.image:getWidth()
   local h = h or self.image:getHeight()
   self.frames = {}

@@ -12,17 +12,6 @@ local lume = require((...):gsub("[^/.\\]+$", "lume"))
 
 local stalker = { _version = "1.0.1" }
 
-local map = function(f, a, ...)
-  local t = { }
-  for _index_0 = 1, #a do
-    local _ = a[_index_0]
-    local _i = _index_0
-    t[_i] = f(_, ...)
-  end
-  return t
-end
-
-
 local dir = juno.fs.listDir
 local isdir = juno.fs.isDir
 local time = juno.time.getTime or os.time
@@ -127,9 +116,13 @@ function stalker.onerror(e, nostacktrace)
   local canvas = juno.Buffer.fromBlank(juno.graphics.getSize())
   local stacktrace = nostacktrace and "" or lume.trim((debug.traceback("", 2):gsub("\t", "")))
   local msg = lume.format("{1}\n\n{2}", {e, stacktrace})
-  local colors = {{255/255, 30/255, 30/255}, {255/255, 240/255, 163/255}, {255/255, 146/255, 181/255}, {255/255, 102/255, 102/255}, {255/255, 205/255, 205/255}}
-  canvas:reset()
-  juno.graphics.reset()
+  local colors = {
+    {255/255, 030/255, 030/255}, 
+    {255/255, 240/255, 163/255},
+    {255/255, 146/255, 181/255},
+    {255/255, 102/255, 102/255},
+    {255/255, 205/255, 205/255}
+  }
 
   juno.onDraw = function()
     local pad = 25
@@ -141,12 +134,12 @@ function stalker.onerror(e, nostacktrace)
       if color2 then canvas:setColor(unpack(color2)) end
       canvas:drawRect(animpos, pos, 8, 1)
     end
-    local function drawtext(str, x, y, color, width)
+    local function drawtext(str, x, y, color)
       canvas:setColor(unpack(color))
-      canvas:drawText(juno.Font.fromEmbedded(16), str, x, y, width)
+      canvas:drawText(juno.Font.fromEmbedded(16), str, x, y)
     end
-    juno.graphics.setColor(unpack(colors[1]))
-    canvas:clear()
+
+    canvas:setColor(unpack(colors[1]))
 
     drawtext("An error has occurred", pad, pad, colors[2])
     drawtext("stalker", width - (juno.Font.fromEmbedded(16)):getWidth("stalker") -
@@ -155,10 +148,12 @@ function stalker.onerror(e, nostacktrace)
     drawtext("Fix the error and program will resume",
                             pad, pad + 46, colors[3])
     drawhr(pad + 72, colors[4], colors[5])
-    drawtext(msg, pad, pad + 90, colors[5], width - pad * 2)
-    juno.graphics.copyPixels(canvas, 0, 0, nil, 1)
-    canvas:reset()
+    drawtext(lume.wordwrap(msg, 58), pad, pad + 90, colors[5])
+
+    juno.graphics.copyPixels(canvas, 0, 0)
     juno.graphics.reset()
+    canvas:clear()
+    canvas:reset()
   end
 end
 

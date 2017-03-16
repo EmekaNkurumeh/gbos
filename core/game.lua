@@ -23,6 +23,8 @@ function Game.init(state)
   Game.drx, Game.dry = 0, 0
   Game.canvas = juno.Buffer.fromBlank(Game.w, Game.h)
   Game.state = state
+  Game.shakeTimer = 0
+  Game.shakeAmount = 0
 end
 
 function Game.stop()
@@ -41,12 +43,9 @@ function Game.remove(obj)
   end
 end
 
-function Game.shake()
-
-end
-
-function Game.clear()
-  Game.canvas:clear()
+function Game.shake(time, amount)
+  Game.shakeTimer = time
+  Game.shakeAmount = amount
 end
 
 function Game.move(dx, dy)
@@ -92,26 +91,35 @@ function Game.update(dt)
       obj:update(dt)
     end
   end
+  if Game.shakeTimer ~= 0 then
+    Game.shakeTimer = Game.shakeTimer - dt
+    if Game.shakeTimer <= 0 then
+      Game.shakeTimer = 0
+      Game.shakeAmount = 0
+    end
+  end
+  collectgarbage()
+  collectgarbage()
 end
 
 function Game.key(key, char)
   if key == "tab" then
-    juno.debug.setVisible(G.debug and not juno.debug.getVisible())
+    local mode = not juno.debug.getVisible()
+    juno.debug.setVisible(G.debug and mode)
   elseif key == "`" then
-    juno.debug.setFocused(G.debug and not juno.debug.getFocused())
+    local mode = not juno.debug.getFocused()
+    juno.debug.setFocused(G.debug and mode)
   elseif key == "escape" then
+    juno.onQuit()
     os.exit()
   elseif key == "r" and G.debug then
-    -- juno.onQuit()
     juno.onLoad()
   end
 end
 
 function Game.draw(obj, x, y, rect, sx, sy)
-  local sx = sx or 1
-  local sy = sy or sx
   rect = _.extend({x = 0, y = 0, w = obj:getWidth(), h = obj:getHeight()}, rect)
-  Game.canvas:copyPixels(obj, x, y, rect, sx, sy)
+  Game.canvas:copyPixels(obj, x, y, rect, sx or 1, sy or sx)
   Game.canvas:reset()
 end
 
@@ -122,8 +130,21 @@ function Game.render()
       Game.canvas:reset()
     end
   end
-  juno.graphics.copyPixels(Game.canvas, Game.drx, Game.dry, {x = Game.x, y = Game.y, w = Game.w, h = Game.h}, Game.sx, Game.sy)
-  Game.clear()
+  if Game.shakeTimer >= 1 then
+    local shake = Game.canvas:clone()
+    shake:clear(0, 0, 0)
+    shake:copyPixels(Game.canvas,
+      _.random() * Game.shakeAmount,
+      _.random() * Game.shakeAmount)
+    Game.canvas = shake
+  end
+
+  local x, y = Game.drx, Game.dry
+  local rx, ry = Game.x, Game.y
+  local rw, rh = Game.w, Game.h
+  
+  juno.graphics.copyPixels(Game.canvas, x, y, {x = rx, y = ry, w = rw, h = rh}, Game.sx, Game.sy)
+  Game.canvas:clear()
 end
 
 
