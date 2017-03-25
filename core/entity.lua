@@ -9,10 +9,7 @@ local Game = require "core.game"
 local Entity = Rect:extend()
 
 function Entity:new()
-  self.x = 0
-  self.y = 0
-  self.w = 16
-  self.h = 16
+  self.super.new(self, 0, 0, 16, 16)
   self.angle = 0
   self.accel = {x = 0, y = 0}
   self.scale = {x = 1, y = 1}
@@ -30,6 +27,7 @@ function Entity:new()
   self.timer = tick.group()
   self.task = coil.group()
   Game.add(self)
+
 end
 
 local loadImage = _.memoize(function(...)
@@ -141,8 +139,7 @@ function Entity:update(dt)
 end
 
 function Entity:draw()
-  -- print(Game.draw())
-  Game.camera:draw(self.image, self.x, self.y, self.frame, self.scale.x, self.scale.y)
+  Game.camera:render(self.image, self.x, self.y, self.frame, self.scale.x, self.scale.y)
 end
 
 return Entity

@@ -86,38 +86,9 @@ function Camera:update(dt)
   end
 end
 
-function Camera:draw(obj, x, y, rect, sx, sy)
+function Camera:render(obj, x, y, rect, sx, sy)
   rect = _.extend({x = 0, y = 0, w = obj:getWidth(), h = obj:getHeight()}, rect)
   Game.framebuffer:copyPixels(obj, x, y, rect, sx or 1, sy or sx)
 end
-
-function Camera:render()
-  for key, obj in pairs(Game.entities) do
-    if obj.visible then
-      obj:draw()
-    end
-  end
-
-  if self.shakeTimer >= 1 then
-    local shake = Game.framebuffer:clone()
-    shake:clear(0, 0, 0)
-
-    shake:copyPixels(Game.framebuffer,
-      _.random() * self.shakeAmount,
-      _.random() * self.shakeAmount)
-
-    Game.framebuffer = shake
-  end
-
-  local rx, ry = self.x, self.y
-  local rw, rh = self.width, self.height
-  local sx, sy = self.scale.x, self.scale.y
-  
-  juno.graphics.copyPixels(Game.framebuffer, 0, 0, {x = rx, y = ry, w = rw, h = rh}, sx, sy)
-
-  Game.framebuffer:clear()
-  Game.framebuffer:reset()
-end
-
 
 return Camera

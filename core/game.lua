@@ -34,7 +34,7 @@ end
 
 function Game.add(obj)
   Game.entities[obj] = obj
-  Game.world:add(obj, obj.x, obj.y, obj.w, obj.h)
+  Game.world:add(obj, obj.x, obj.y, obj.width, obj.height)
 end
 
 function Game.remove(obj)
@@ -71,7 +71,33 @@ function Game.key(key, char)
 end
 
 function Game.render()
-  Game.camera:render()
+  local cam = Game.camera
+
+  for key, obj in pairs(Game.entities) do
+    if obj.visible and cam:overlaps(obj) then
+      obj:draw()
+    end
+  end
+
+  if cam.shakeTimer >= 1 then
+    local shake = Game.framebuffer:clone()
+    shake:clear(0, 0, 0)
+
+    shake:copyPixels(Game.framebuffer,
+      _.random() * cam.shakeAmount,
+      _.random() * cam.shakeAmount)
+
+    Game.framebuffer = shake
+  end
+
+  local rx, ry = cam.x, cam.y
+  local rw, rh = cam.width, cam.height
+  local sx, sy = cam.scale.x, cam.scale.y
+
+  juno.graphics.copyPixels(Game.framebuffer, 0, 0, {x = rx, y = ry, w = rw, h = rh}, sx, sy)
+
+  Game.framebuffer:clear()
+  Game.framebuffer:reset()
 end
 
 
