@@ -35,7 +35,7 @@ function juno.onUpdate(dt)
   if G.debug then require("lib.stalker").update() end
   if G.debug then require("lib.lovebird").update() end
   Game.update(dt)
-  
+
   G.tick = G.tick + 1
 
   local s = 200
@@ -56,7 +56,7 @@ function juno.onUpdate(dt)
   end
 
   if Input.wasPressed("action") then
-    Game.shake(2, 3)
+    Game.camera:shake(2, 3)
   end
 
 end

@@ -110,9 +110,9 @@ function Camera:render()
   end
 
   local rx, ry = self.x, self.y
-  local rw, rh = self.w, self.h
+  local rw, rh = self.width, self.height
   local sx, sy = self.scale.x, self.scale.y
-
+  
   juno.graphics.copyPixels(Game.framebuffer, 0, 0, {x = rx, y = ry, w = rw, h = rh}, sx, sy)
 
   Game.framebuffer:clear()

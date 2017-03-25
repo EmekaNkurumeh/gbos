@@ -45,12 +45,12 @@ function Game.remove(obj)
 end
 
 function Game.update(dt)
+  Game.camera:update(dt)
   for key, obj in pairs(Game.entities) do
     if obj.update then
       obj:update(dt)
     end
   end
-  Game.camera:update()
   collectgarbage()
   collectgarbage()
 end
