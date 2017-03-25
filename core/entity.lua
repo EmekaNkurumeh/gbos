@@ -8,8 +8,9 @@ local Game = require "core.game"
 
 local Entity = Rect:extend()
 
-function Entity:new()
-  self.super.new(self, 0, 0, 16, 16)
+function Entity:new(width, height)
+  local w, h = width or 16, height or 16
+  self.super.new(self, 0, 0, w, h)
   self.angle = 0
   self.accel = {x = 0, y = 0}
   self.scale = {x = 1, y = 1}

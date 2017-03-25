@@ -23,7 +23,8 @@ function Game.init(state)
   Game.framebuffer = juno.Buffer.fromBlank(Game.width, Game.height)
 
   local Camera = require "core.camera"
-  Game.camera = Camera(0, 0, 512, 512)
+  Game.camera = Camera(0, 0)
+  Game.camera:setBounds(Game.width, Game.height)
 
   Game.state = state
 end
@@ -72,10 +73,12 @@ end
 
 function Game.render()
   local cam = Game.camera
-
   for key, obj in pairs(Game.entities) do
     if obj.visible and cam:overlaps(obj) then
       obj:draw()
+      if G.debug then
+        Game.framebuffer:drawBox(obj.x, obj.y, obj.width, obj.height, 1, 1, 1, .1)
+      end
     end
   end
 

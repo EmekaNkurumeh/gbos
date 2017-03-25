@@ -5,16 +5,16 @@ local Input = require "core.input"
 
 function juno.onLoad()
   Game.init()
-  i = Entity()
+  i = Entity(16, 16)
   i:loadImage("data/images/player/player.png", 16, 16)
   i:addAnimation("idle", {1,2,3,4}, 9, true)
   i:play("idle")
 
-  d = Entity()
+  d = Entity(16, 16)
   d:loadImage("data/images/player/player.png", 16, 16)
   d:addAnimation("idle", {1,2,3,4}, 9, true)
   d:play("idle")
-  d:setX(64)
+  d:setX(16)
   d:setY(64)
 
   Input.register({
@@ -66,6 +66,7 @@ function juno.onKeyDown(key, char)
 end
 
 function juno.onDraw()
+  Game.framebuffer:drawRect(0,0,32,32)
   Game.render()
 end
 

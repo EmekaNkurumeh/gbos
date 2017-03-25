@@ -7,7 +7,7 @@ local Camera = Rect:extend()
 
 function Camera:new(x, y)
   self.x, self.y = 0, 0
-  self.width, self.height = Game.width, Game.height
+  self.width, self.height = G.width, G.height
 
   self:set(x, y, nil, nil)
 
@@ -23,8 +23,9 @@ function Camera:shake(time, amount)
 end
 
 function Camera:move(dx, dy)
-  self.x = self.x + (dx or 0)
-  self.y = self.y + (dy or 0)
+  local x = self.x + (dx or 0)
+  local y = self.y + (dy or 0)
+  self:goTo(x, y)
 end
 
 function Camera:zoom(dsx, dsy)
@@ -34,12 +35,12 @@ function Camera:zoom(dsx, dsy)
 end
 
 function Camera:setX(x)
-  local x = self.bounds and _.clamp(x, self.x, self.bounds.width) or x
+  local x = self.bounds and _.clamp(x, 0, self.bounds.width) or x
   self:set(x, nil, nil, nil)
 end
 
 function Camera:setY(y)
-  local y = self.bounds and _.clamp(y, self.y, self.bounds.height) or y
+  local y = self.bounds and _.clamp(y, 0, self.bounds.height) or y
   self:set(nil, y, nil, nil)
 end
 
