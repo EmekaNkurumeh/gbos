@@ -32,9 +32,10 @@ function juno.onLoad()
 end
 
 function juno.onUpdate(dt)
-  require("lib.stalker").update(dt)
+  if G.debug then require("lib.stalker").update() end
   if G.debug then require("lib.lovebird").update() end
   Game.update(dt)
+  
   G.tick = G.tick + 1
 
   local s = 200

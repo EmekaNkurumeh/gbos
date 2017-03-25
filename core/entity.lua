@@ -141,7 +141,8 @@ function Entity:update(dt)
 end
 
 function Entity:draw()
-  Game.draw(self.image, self.x, self.y, self.frame, self.scale.x, self.scale.y)
+  -- print(Game.draw())
+  Game.camera:draw(self.image, self.x, self.y, self.frame, self.scale.x, self.scale.y)
 end
 
 return Entity

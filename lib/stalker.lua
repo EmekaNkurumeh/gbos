@@ -117,11 +117,11 @@ function stalker.onerror(e, nostacktrace)
   local stacktrace = nostacktrace and "" or lume.trim((debug.traceback("", 2):gsub("\t", "")))
   local msg = lume.format("{1}\n\n{2}", {e, stacktrace})
   local colors = {
-    {255/255, 030/255, 030/255}, 
-    {255/255, 240/255, 163/255},
-    {255/255, 146/255, 181/255},
-    {255/255, 102/255, 102/255},
-    {255/255, 205/255, 205/255}
+    { lume.color("#ff1e1e") },
+    { lume.color("#fff0a3") },
+    { lume.color("#ff92b5") },
+    { lume.color("#ff6666") },
+    { lume.color("#ffcdcd") },
   }
 
   juno.onDraw = function()
@@ -139,6 +139,9 @@ function stalker.onerror(e, nostacktrace)
       canvas:drawText(juno.Font.fromEmbedded(16), str, x, y)
     end
 
+    juno.graphics.reset()
+    canvas:reset()
+
     canvas:setColor(unpack(colors[1]))
 
     drawtext("An error has occurred", pad, pad, colors[2])
@@ -151,9 +154,7 @@ function stalker.onerror(e, nostacktrace)
     drawtext(lume.wordwrap(msg, 58), pad, pad + 90, colors[5])
 
     juno.graphics.copyPixels(canvas, 0, 0)
-    juno.graphics.reset()
     canvas:clear()
-    canvas:reset()
   end
 end
 

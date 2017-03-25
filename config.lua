@@ -1,4 +1,3 @@
-local loadkit = require("lib.loadkit")
 local _ = require("lib.lume")
 
 G = {
