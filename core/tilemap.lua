@@ -47,7 +47,7 @@ function TileMap:loadArray(array, width, imageFile, tileSize)
 end
 
 function TileMap:loadTMX(filename, imageFile)
-  local text = juno.fs.read(filename)
+  local text = sol.fs.read(filename)
   local ptn = '"csv">(.-)<'
   local s = text:match(ptn)
   assert(s, "tile layer does not exist")

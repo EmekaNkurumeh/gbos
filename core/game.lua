@@ -20,7 +20,7 @@ function Game.init(state)
   Game.width = 512
   Game.height = 512
 
-  Game.framebuffer = juno.Buffer.fromBlank(Game.width, Game.height)
+  Game.framebuffer = sol.Buffer.fromBlank(Game.width, Game.height)
 
   local Camera = require "core.camera"
   Game.camera = Camera(0, 0)
@@ -58,16 +58,16 @@ end
 
 function Game.key(key, char)
   if key == "tab" then
-    local mode = not juno.debug.getVisible()
-    juno.debug.setVisible(G.debug and mode)
+    local mode = not sol.debug.getVisible()
+    sol.debug.setVisible(G.debug and mode)
   elseif key == "`" then
-    local mode = not juno.debug.getFocused()
-    juno.debug.setFocused(G.debug and mode)
+    local mode = not sol.debug.getFocused()
+    sol.debug.setFocused(G.debug and mode)
   elseif key == "escape" then
-    juno.onQuit()
+    sol.onQuit()
     os.exit()
   elseif key == "r" and G.debug then
-    juno.onLoad()
+    sol.onLoad()
   end
 end
 
@@ -82,7 +82,8 @@ function Game.render()
     end
   end
 
-  if cam.shakeTimer >= 1 then
+  if cam.shakeTimer ~= 0 then
+    print(cam.shakeTimer)
     local shake = Game.framebuffer:clone()
     shake:clear(0, 0, 0)
 
@@ -97,7 +98,7 @@ function Game.render()
   local rw, rh = cam.width, cam.height
   local sx, sy = cam.scale.x, cam.scale.y
 
-  juno.graphics.copyPixels(Game.framebuffer, 0, 0, {x = rx, y = ry, w = rw, h = rh}, sx, sy)
+  sol.graphics.copyPixels(Game.framebuffer, 0, 0, {x = rx, y = ry, w = rw, h = rh}, sx, sy)
 
   Game.framebuffer:clear()
   Game.framebuffer:reset()

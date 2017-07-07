@@ -16,12 +16,12 @@ end
 
 function Input.isDown(id)
   assert(Input.map[id], "bad id")
-  return juno.keyboard.isDown(unpack(Input.map[id]))
+  return sol.keyboard.isDown(unpack(Input.map[id]))
 end
 
 function Input.wasPressed(id)
   assert(Input.map[id], "bad id")
-  return juno.keyboard.wasPressed(unpack(Input.map[id]))
+  return sol.keyboard.wasPressed(unpack(Input.map[id]))
 end
 
 return Input

@@ -32,7 +32,7 @@ function Entity:new(width, height)
 end
 
 local loadImage = _.memoize(function(...)
-  return juno.Buffer.fromFile(...)
+  return sol.Buffer.fromFile(...)
 end)
 
 function Entity:loadImage(file, w, h)

@@ -12,12 +12,12 @@ local lume = require((...):gsub("[^/.\\]+$", "lume"))
 
 local stalker = { _version = "1.0.1" }
 
-local dir = juno.fs.listDir
-local isdir = juno.fs.isDir
-local time = juno.time.getTime or os.time
-local lastmodified = juno.fs.getModified
+local dir = sol.fs.listDir
+local isdir = sol.fs.isDir
+local time = sol.time.getTime or os.time
+local lastmodified = sol.fs.getModified
 
-local junocallbacknames = {
+local solcallbacknames = {
   "onUpdate",
   "onLoad",
   "onDraw",
@@ -42,7 +42,7 @@ function stalker.init()
   stalker.lasterrorfile = nil
   stalker.files = {}
   stalker.funcwrappers = {}
-  stalker.junofuncs = {}
+  stalker.solfuncs = {}
   stalker.state = "init"
   lume.each(stalker.getchanged(), stalker.resetfile)
   return stalker
@@ -72,24 +72,24 @@ end
 
 
 function stalker.initwrappers()
-  for _, v in pairs(junocallbacknames) do
+  for _, v in pairs(solcallbacknames) do
     stalker.funcwrappers[v] = function(...)
       local args = {...}
       xpcall(function()
-        return stalker.junofuncs[v] and stalker.junofuncs[v](unpack(args))
+        return stalker.solfuncs[v] and stalker.solfuncs[v](unpack(args))
       end, stalker.onerror)
     end
-    stalker.junofuncs[v] = juno[v]
+    stalker.solfuncs[v] = sol[v]
   end
   stalker.updatewrappers()
 end
 
 
 function stalker.updatewrappers()
-  for _, v in pairs(junocallbacknames) do
-    if juno[v] ~= stalker.funcwrappers[v] then
-      stalker.junofuncs[v] = juno[v]
-      juno[v] = stalker.funcwrappers[v]
+  for _, v in pairs(solcallbacknames) do
+    if sol[v] ~= stalker.funcwrappers[v] then
+      stalker.solfuncs[v] = sol[v]
+      sol[v] = stalker.funcwrappers[v]
     end
   end
 end
@@ -100,20 +100,20 @@ function stalker.onerror(e, nostacktrace)
   stalker.state = "error"
 
   -- Set up callbacks
-  for _, v in pairs(junocallbacknames) do
-    juno[v] = function() end
+  for _, v in pairs(solcallbacknames) do
+    sol[v] = function() end
   end
 
-  juno.onUpdate = stalker.update
+  sol.onUpdate = stalker.update
 
-  juno.onKeyDown = function(k)
+  sol.onKeyDown = function(k)
     if k == "escape" then
       stalker.print("Exiting...")
       os.exit()
     end
   end
 
-  local canvas = juno.Buffer.fromBlank(juno.graphics.getSize())
+  local canvas = sol.Buffer.fromBlank(sol.graphics.getSize())
   local stacktrace = nostacktrace and "" or lume.trim((debug.traceback("", 2):gsub("\t", "")))
   local msg = lume.format("{1}\n\n{2}", {e, stacktrace})
   local colors = {
@@ -124,7 +124,7 @@ function stalker.onerror(e, nostacktrace)
     { lume.color("#ffcdcd") },
   }
 
-  juno.onDraw = function()
+  sol.onDraw = function()
     local pad = 25
     local width = canvas:getWidth()
     local function drawhr(pos, color1, color2)
@@ -136,16 +136,16 @@ function stalker.onerror(e, nostacktrace)
     end
     local function drawtext(str, x, y, color)
       canvas:setColor(unpack(color))
-      canvas:drawText(juno.Font.fromEmbedded(16), str, x, y)
+      canvas:drawText(sol.Font.fromEmbedded(16), str, x, y)
     end
 
-    juno.graphics.reset()
+    sol.graphics.reset()
     canvas:reset()
 
     canvas:setColor(unpack(colors[1]))
 
     drawtext("An error has occurred", pad, pad, colors[2])
-    drawtext("stalker", width - (juno.Font.fromEmbedded(16)):getWidth("stalker") -
+    drawtext("stalker", width - (sol.Font.fromEmbedded(16)):getWidth("stalker") -
              pad, pad, colors[4])
     drawhr(pad + 32, colors[4], colors[5])
     drawtext("Fix the error and program will resume",
@@ -153,7 +153,7 @@ function stalker.onerror(e, nostacktrace)
     drawhr(pad + 72, colors[4], colors[5])
     drawtext(lume.wordwrap(msg, 58), pad, pad + 90, colors[5])
 
-    juno.graphics.copyPixels(canvas, 0, 0)
+    sol.graphics.copyPixels(canvas, 0, 0)
     canvas:clear()
   end
 end
@@ -169,8 +169,8 @@ end
 
 function stalker.exiterrorstate()
   stalker.state = "normal"
-  for _, v in pairs(junocallbacknames) do
-    juno[v] = stalker.funcwrappers[v]
+  for _, v in pairs(solcallbacknames) do
+    sol[v] = stalker.funcwrappers[v]
   end
 end
 

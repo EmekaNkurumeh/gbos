@@ -1,69 +1,69 @@
 local _ = require "lib.lume"
 local Object = require "lib.classic"
 
-local View = Object:extend()
+local Camera = Object:extend()
 
-function View:new(x, y, w, h, sx, sy)
-  self.type = "view"
-  self._x, self._y = x, y
-  self._w, self._h = w, h
-  self._sx, self._sy = sx, sy
-  self.canvas = juno.Buffer.fromBlank(self._w, self._h)
+function Camera:new(x, y, w, h, sx, sy)
+  self.type = "camera"
+  self.x, self.y = x, y
+  self.w, self.h = w, h
+  self.sx, self.sy = sx, sy
+  self.canvas = sol.Buffer.fromBlank(self.w, self.h)
 end
 
-function View:set(obj, x, y, rect, sx, sy)
+function Camera:set(obj, x, y, rect, sx, sy)
   local sx = sx or 1
   local sy = sy or sx
   rect = _.extend({x = 0, y = 0, w = obj:getWidth(), h = obj:getHeight()}, rect)
   self.canvas:copyPixels(obj, x, y, rect, sx, sy)
 end
 
-function View:unset()
+function Camera:unset()
   self.canvas:clear()
 end
 
-function View:draw(drx, dry)
+function Camera:draw(drx, dry)
   local drx = drx or 0
   local dry = dry or 0
-  juno.graphics.copyPixels(self.canvas, drx, dry, {x = self._x, y = self._y, w = self._w, h = self._h}, self._sx, self.sy)
+  sol.graphics.copyPixels(self.canvas, drx, dry, {x = self.x, y = self.y, w = self.w, h = self.h}, self.sx, self.sy)
   self:unset()
 end
 
-function View:move(dx, dy)
-  self._x = self._x + (dx or 0)
-  self._y = self._y + (dy or 0)
+function Camera:move(dx, dy)
+  self.x = self.x + (dx or 0)
+  self.y = self.y + (dy or 0)
 end
 
-function View:zoom(dsx, dsy)
+function Camera:zoom(dsx, dsy)
   local dsx = dsx or 1
-  self._sx = self._sx * dsx
-  self._sy = self._sy * (dsy or dsx)
+  self.sx = self.sx * dsx
+  self.sy = self.sy * (dsy or dsx)
 end
 
-function View:setX(x)
-  self._x = self._bounds and _.clamp(x, self._bounds.x1, self._bounds.x2) or x
+function Camera:setX(x)
+  self.x = self.bounds and _.clamp(x, self.bounds.x1, self.bounds.x2) or x
 end
 
-function View:setY(y)
-  self._y = self._bounds and _.clamp(y, self._bounds.y1, self._bounds.y2) or y
+function Camera:setY(y)
+  self.y = self.bounds and _.clamp(y, self.bounds.y1, self.bounds.y2) or y
 end
 
-function View:goTo(x, y)
+function Camera:goTo(x, y)
   self:setX(x or self.x)
   self:setY(y or self.y)
 end
 
-function View:setScale(dsx, dsy)
-  self._sx = dsx or self._sx
-  self._sy = dsy or self._sy
+function Camera:setScale(dsx, dsy)
+  self.sx = dsx or self.sx
+  self.sy = dsy or self.sy
 end
 
-function View:getBounds()
-  return (table.unpack or unpack)(self._bounds)
+function Camera:getBounds()
+  return (table.unpack or unpack)(self.bounds)
 end
 
-function View:setBounds(x, y, w, h)
-  self._bounds = {w = w, h = h, x1 = x, y1 = y, x2 = x + w, y2 = y + h}
+function Camera:setBounds(x, y, w, h)
+  self.bounds = {w = w, h = h, x1 = x, y1 = y, x2 = x + w, y2 = y + h}
 end
 
-return View
+return Camera

@@ -8,9 +8,9 @@ function Save:new(name, data)
   self.name = name
   self.data = data or {}
   local data = {}
-  if juno.fs.exists(self.name) then
+  if sol.fs.exists(self.name) then
     local section
-    local file = juno.fs.read(self.name)
+    local file = sol.fs.read(self.name)
     for line in file:gmatch("[^\r\n]+") do
       local tempSection = line:match("^%[([^%[%]]+)%]$")
       if tempSection then
@@ -37,7 +37,7 @@ function Save:new(name, data)
       end
     end
   else
-    juno.fs.write(self.name, " ")
+    sol.fs.write(self.name, " ")
   end
   self.data = lume.extend(self.data, data)
 end
@@ -62,7 +62,7 @@ function Save:set(t)
     end
     contents = contents .. "\n"
   end
-  juno.fs.write(self.name, contents)
+  sol.fs.write(self.name, contents)
 end
 
 return Save

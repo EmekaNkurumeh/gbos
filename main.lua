@@ -3,7 +3,7 @@ local Entity = require "core.entity"
 local Input = require "core.input"
 
 
-function juno.onLoad()
+function sol.onLoad()
   Game.init()
   i = Entity(16, 16)
   i:loadImage("data/images/player/player.png", 16, 16)
@@ -31,7 +31,7 @@ function juno.onLoad()
 
 end
 
-function juno.onUpdate(dt)
+function sol.onUpdate(dt)
   if G.debug then require("lib.stalker").update() end
   if G.debug then require("lib.lovebird").update() end
   Game.update(dt)
@@ -56,20 +56,20 @@ function juno.onUpdate(dt)
   end
 
   if Input.wasPressed("action") then
-    Game.camera:shake(2, 3)
+    Game.camera:shake(2, 30)
   end
 
 end
 
-function juno.onKeyDown(key, char)
+function sol.onKeyDown(key, char)
   Game.key(key, char)
 end
 
-function juno.onDraw()
+function sol.onDraw()
   Game.framebuffer:drawRect(0,0,32,32)
   Game.render()
 end
 
-function juno.onQuit()
+function sol.onQuit()
   Game.stop()
 end

@@ -7,7 +7,7 @@ G = {
   scale = 4,
   tick = 0,
   debug = true
-  -- debug = _.find(juno._argv, "--debug") or _.find(juno._argv, "-d")
+  -- debug = _.find(sol._argv, "--debug") or _.find(sol._argv, "-d")
 }
 
 return {
